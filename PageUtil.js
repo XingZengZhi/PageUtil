@@ -40,7 +40,6 @@
     PageUtil.prototype = {
         getPageDate:function () {
             $.post(dataURL,myparams, function (result) {
-                // console.log(result);
                 if(typeof result != 'object'){
                     console.error("is not object.");
                     return;
