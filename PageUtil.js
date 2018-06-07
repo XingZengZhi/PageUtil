@@ -21,9 +21,13 @@
 
     var PageUtil = function (config) {
         _this = this;
+        //分页数
         allowMax = typeof config.allowMax == "undefined" ? 0 : config.allowMax;
+        //初始化分页数量
         allowMin = typeof config.allowMin == "undefined" ? 4 : config.allowMin;
+        //参数
         myparams = config.myparams;
+        //请求数据地址
         dataURL = config.dataURL;
         countPage = typeof config.countPage == "undefined" ? $("#countPage") : config.countPage;
         rowSize = typeof config.rowSize == "undefined" ? $("#countPage") : config.rowSize;
@@ -36,7 +40,7 @@
     PageUtil.prototype = {
         getPageDate:function () {
             $.post(dataURL,myparams, function (result) {
-                console.log(result);
+                // console.log(result);
                 if(typeof result != 'object'){
                     console.error("is not object.");
                     return;
@@ -73,7 +77,6 @@
             var ind = parseInt(pagination.children().children(".number:last").text());
             var endInd = ind + allowMin > allowMax ? allowMax : ind + allowMin;
             if(!(ind === allowMax)){
-                // number.parent().remove();
                 pagination.children().children(".number").remove();
             }
             /**
@@ -84,7 +87,6 @@
                 nex.addClass("disabled");
                 return;
             }else{
-                pre.on('click', _this.leftFun);
                 pre.removeClass("disabled");
                 nex.removeClass("disabled");
             }
@@ -96,9 +98,9 @@
         },
         leftFun:function(e){
             var ind = parseInt(pagination.children().children(".number:first").text());
+            debugger;
             var startInd = ind - allowMin > 0 ? ind - allowMin : 1;
             if(!(ind === 1)){
-                // number.parent().remove();
                 pagination.children().children(".number").remove();
             }
             /**
@@ -109,7 +111,6 @@
                 pre.addClass("disabled");
                 return;
             }else{
-                nex.on('click', _this.rightFun);
                 nex.removeClass("disabled");
                 pre.removeClass("disabled");
             }
